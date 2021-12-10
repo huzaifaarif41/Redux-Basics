@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+import { useSelector } from 'react-redux';
+import Counter from './components/Counter';
+import Header from './components/Header';
+import Auth from './components/Auth';
+import UserProfile from './components/UserProfile';
 
 function App() {
+
+  const isAuth =useSelector(state=> state.authentication.isAuthenticated)    //authentication is an identifier in configureStore and in authSlice, we have a property of isAuthenticated
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header />
+      {!isAuth && <Auth />}
+      {isAuth && <UserProfile /> }
+      <Counter />
+    </>
   );
 }
+
 
 export default App;
